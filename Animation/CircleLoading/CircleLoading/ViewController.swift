@@ -52,7 +52,7 @@ enum AnimationListTableViewItemIndex: Int {
         case .bezierDraw:
             return PainterViewController()
         case .navigationBack:
-            return nil
+            return NavigationBackViewController()
         case .metaBall:
             return nil
         case .DeCasteljau:
