@@ -24,8 +24,8 @@ class HardModeViewController: UIViewController {
     }
     
     @objc private func tapButton(sender: UIBarButtonItem) {
-//        bezierView?.controlPoints = [CGPoint(x: 100, y: 200), CGPoint(x: 200, y: 210), CGPoint(x: 220, y: 400), CGPoint(x: 120, y: 410), CGPoint(x: 70, y: 380), CGPoint(x: 30, y: 300)]
-        bezierView?.controlPoints = [CGPoint(x: 100, y: 200), CGPoint(x: 200, y: 210), CGPoint(x: 90, y: 470), CGPoint(x: 170, y: 490)]
+        bezierView?.controlPoints = [CGPoint(x: 100, y: 200), CGPoint(x: 200, y: 210), CGPoint(x: 220, y: 400), CGPoint(x: 120, y: 410), CGPoint(x: 70, y: 380), CGPoint(x: 30, y: 300)]
+//        bezierView?.controlPoints = [CGPoint(x: 100, y: 200), CGPoint(x: 200, y: 210), CGPoint(x: 90, y: 470), CGPoint(x: 170, y: 490)]
         bezierView?.draw()
     }
     
@@ -47,8 +47,8 @@ class HardModeView: UIView {
     var controlPoints: [CGPoint] = []
     weak var displayLink: CADisplayLink?
     
-    private let speed = 0.01
-    private var u = 0.01
+    private let speed = 0.005
+    private var u = 0.005
 
     var allPoints: [CGPoint] = []
     var finalPoints: [CGPoint] = []
@@ -66,7 +66,11 @@ class HardModeView: UIView {
     
     override func draw(_ rect: CGRect) {
         if controlPoints.count > 1, let context = UIGraphicsGetCurrentContext() {
-            drawLines(points: allPoints, color: nil, context: context)
+            if displayLink?.isPaused ?? true {
+                
+            } else {
+                drawLines(points: allPoints, color: nil, context: context)
+            }
             drawLines(points: finalPoints, color: .blue, context: context)
             drawLines(points: controlPoints, color: .darkGray, context: context)
         }
@@ -83,8 +87,9 @@ class HardModeView: UIView {
         allPoints.removeAll()
         u = u + speed
         if u > 1.0 {
-            u = 0.01
+            u = 0.005
             displayLink?.isPaused = true
+            setNeedsDisplay()
         } else {
             finalPoints.append(calculate(points: controlPoints, u: CGFloat(u)))
             setNeedsDisplay()
