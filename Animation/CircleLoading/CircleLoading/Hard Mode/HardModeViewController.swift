@@ -24,7 +24,8 @@ class HardModeViewController: UIViewController {
     }
     
     @objc private func tapButton(sender: UIBarButtonItem) {
-        bezierView?.controlPoints = [CGPoint(x: 100, y: 100), CGPoint(x: 200, y: 110), CGPoint(x: 220, y: 300), CGPoint(x: 120, y: 310)]
+//        bezierView?.controlPoints = [CGPoint(x: 100, y: 200), CGPoint(x: 200, y: 210), CGPoint(x: 220, y: 400), CGPoint(x: 120, y: 410), CGPoint(x: 70, y: 380), CGPoint(x: 30, y: 300)]
+        bezierView?.controlPoints = [CGPoint(x: 100, y: 200), CGPoint(x: 200, y: 210), CGPoint(x: 90, y: 470), CGPoint(x: 170, y: 490)]
         bezierView?.draw()
     }
     
@@ -32,6 +33,13 @@ class HardModeViewController: UIViewController {
         view.backgroundColor = .white
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Try", style: .plain, target: self, action: #selector(tapButton(sender:)))
+        
+        bezierView = {
+            let bezierView = HardModeView(frame: view.bounds)
+            bezierView.backgroundColor = .white
+            view.addSubview(bezierView)
+            return bezierView
+        }()
     }
 }
 
@@ -43,7 +51,8 @@ class HardModeView: UIView {
     private var u = 0.01
 
     var allPoints: [CGPoint] = []
-    var finalPoint: CGPoint = .zero
+    var finalPoints: [CGPoint] = []
+    private var colors: [UIColor] = []
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,12 +65,17 @@ class HardModeView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        
+        if controlPoints.count > 1, let context = UIGraphicsGetCurrentContext() {
+            drawLines(points: allPoints, color: nil, context: context)
+            drawLines(points: finalPoints, color: .blue, context: context)
+            drawLines(points: controlPoints, color: .darkGray, context: context)
+        }
     }
     
     func draw() {
+        u = 0.01
         allPoints.removeAll()
-        finalPoint = calculate(points: controlPoints, u: CGFloat(u))
+        finalPoints = [calculate(points: controlPoints, u: CGFloat(u))]
         displayLink?.isPaused = false
     }
     
@@ -72,7 +86,7 @@ class HardModeView: UIView {
             u = 0.01
             displayLink?.isPaused = true
         } else {
-            finalPoint = calculate(points: controlPoints, u: CGFloat(u))
+            finalPoints.append(calculate(points: controlPoints, u: CGFloat(u)))
             setNeedsDisplay()
         }
     }
@@ -84,6 +98,16 @@ class HardModeView: UIView {
         displayLink.add(to: .main, forMode: .common)
         displayLink.isPaused = true
         self.displayLink = displayLink
+        
+        let randomColor: () -> UIColor = {
+            let r = CGFloat(arc4random() % 255) / 255.0
+            let g = CGFloat(arc4random() % 255) / 255.0
+            let b = CGFloat(arc4random() % 255) / 255.0
+            return UIColor(red: r, green: g, blue: b, alpha: 1.0)
+        }
+        for _ in 0...7 {
+            colors.append(randomColor())
+        }
     }
     
     private func calculate(points: [CGPoint], u: CGFloat) -> CGPoint {
@@ -98,7 +122,7 @@ class HardModeView: UIView {
             let second = points[index + 1]
             
             let distanceX = second.x - first.x
-            let distanceY = second.y - second.y
+            let distanceY = second.y - first.y
             let current = CGPoint(x: first.x + distanceX * u, y: first.y + distanceY * u)
             tempPoints.append(current)
             allPoints.append(current)
@@ -107,23 +131,40 @@ class HardModeView: UIView {
         return calculate(points: tempPoints, u: u)
     }
     
-    private func drawLines(points: [CGPoint], color: UIColor = .darkGray) {
+    private func drawLines(points: [CGPoint], color: UIColor?, context: CGContext) {
+        var drawColor: UIColor = .blue
         for index in 0..<(points.count - 1) {
             let start = points[index]
             let end = points[index + 1]
-            drawPoint(point: start, pointColor: color)
-            drawLine(with: start, to: end, color: color)
+            drawColor = color ?? peekColor(index)
+            drawPoint(point: start, pointColor: drawColor, context: context)
+            drawLine(with: start, to: end, color: drawColor, context: context)
         }
         if let last = points.last {
-            drawPoint(point: last, pointColor: color)
+            drawPoint(point: last, pointColor: drawColor, context: context)
         }
     }
     
-    private func drawPoint(point: CGPoint, pointColor: UIColor) {
-        
+    private func drawPoint(point: CGPoint, pointColor: UIColor, context: CGContext) {
+        let path = CGMutablePath()
+        path.move(to: point)
+        context.addArc(center: point, radius: 5, startAngle: 0, endAngle: CGFloat(Float.pi * 2), clockwise: true)
+        context.setFillColor(pointColor.cgColor)
+        context.addPath(path)
+        context.fillPath()
     }
     
-    private func drawLine(with start: CGPoint, to end: CGPoint, color: UIColor) {
-        
+    private func drawLine(with start: CGPoint, to end: CGPoint, color: UIColor, context: CGContext) {
+        let path = CGMutablePath()
+        path.move(to: start)
+        path.addLine(to: end)
+        context.setStrokeColor(color.cgColor)
+        context.setLineWidth(2.0)
+        context.addPath(path)
+        context.strokePath()
+    }
+    
+    private func peekColor(_ index: Int) -> UIColor {
+        return colors[index % colors.count]
     }
 }
