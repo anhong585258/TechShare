@@ -11,7 +11,7 @@ import UIKit
 enum AnimationListTableViewItemIndex: Int {
     case circleLoading = 0
     case bezierDraw = 1
-    case navigationBack = 2
+    case threeBall = 2
     case metaBall = 3
     case DeCasteljau = 4
     
@@ -21,8 +21,8 @@ enum AnimationListTableViewItemIndex: Int {
             return "Spin loading"
         case .bezierDraw:
             return "Draw via pan"
-        case .navigationBack:
-            return "Navigation back"
+        case .threeBall:
+            return "Three ball loading"
         case .metaBall:
             return "Meta Ball"
         case .DeCasteljau:
@@ -36,8 +36,8 @@ enum AnimationListTableViewItemIndex: Int {
             return .darkText
         case .bezierDraw:
             return .darkText
-        case .navigationBack:
-            return .lightGray
+        case .threeBall:
+            return .darkText
         case .metaBall:
             return .lightGray
         case .DeCasteljau:
@@ -51,8 +51,8 @@ enum AnimationListTableViewItemIndex: Int {
             return CircleViewController()
         case .bezierDraw:
             return PainterViewController()
-        case .navigationBack:
-            return NavigationBackViewController()
+        case .threeBall:
+            return ThreeBallViewController()
         case .metaBall:
             return nil
         case .DeCasteljau:

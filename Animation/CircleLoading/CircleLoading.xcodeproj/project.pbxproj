@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		420A7D3E229C2B8F0039B5D3 /* NavigationBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420A7D3D229C2B8F0039B5D3 /* NavigationBackViewController.swift */; };
 		4217C9C2229A436100307D85 /* CircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217C9C1229A436100307D85 /* CircleViewController.swift */; };
 		4217C9C5229A78D900307D85 /* PainterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217C9C4229A78D900307D85 /* PainterViewController.swift */; };
 		4217C9C7229ACBE700307D85 /* WiredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217C9C6229ACBE700307D85 /* WiredViewController.swift */; };
@@ -16,10 +15,11 @@
 		42239A322296DAE200AD3DD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42239A302296DAE200AD3DD4 /* Main.storyboard */; };
 		42239A342296DAE500AD3DD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42239A332296DAE500AD3DD4 /* Assets.xcassets */; };
 		42239A372296DAE500AD3DD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42239A352296DAE500AD3DD4 /* LaunchScreen.storyboard */; };
+		42712BCD229E28A30059AFB2 /* ThreeBallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42712BCC229E28A30059AFB2 /* ThreeBallViewController.swift */; };
+		42712BCF229E2F7D0059AFB2 /* ThreeBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42712BCE229E2F7D0059AFB2 /* ThreeBallView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		420A7D3D229C2B8F0039B5D3 /* NavigationBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackViewController.swift; sourceTree = "<group>"; };
 		4217C9C1229A436100307D85 /* CircleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleViewController.swift; sourceTree = "<group>"; };
 		4217C9C4229A78D900307D85 /* PainterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PainterViewController.swift; sourceTree = "<group>"; };
 		4217C9C6229ACBE700307D85 /* WiredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiredViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +30,8 @@
 		42239A332296DAE500AD3DD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42239A362296DAE500AD3DD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42239A382296DAE500AD3DD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42712BCC229E28A30059AFB2 /* ThreeBallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeBallViewController.swift; sourceTree = "<group>"; };
+		42712BCE229E2F7D0059AFB2 /* ThreeBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeBallView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,14 +45,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		420A7D3C229C2AFB0039B5D3 /* NavigationBack */ = {
-			isa = PBXGroup;
-			children = (
-				420A7D3D229C2B8F0039B5D3 /* NavigationBackViewController.swift */,
-			);
-			path = NavigationBack;
-			sourceTree = "<group>";
-		};
 		4217C9C0229A434100307D85 /* CircleLoading */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,7 +82,7 @@
 			children = (
 				4217C9C0229A434100307D85 /* CircleLoading */,
 				4217C9C3229A78BB00307D85 /* Painter */,
-				420A7D3C229C2AFB0039B5D3 /* NavigationBack */,
+				42712BCB229E28380059AFB2 /* ThreeBall */,
 				42239A2C2296DAE200AD3DD4 /* AppDelegate.swift */,
 				42239A2E2296DAE200AD3DD4 /* ViewController.swift */,
 				42239A302296DAE200AD3DD4 /* Main.storyboard */,
@@ -98,6 +92,15 @@
 				4217C9C6229ACBE700307D85 /* WiredViewController.swift */,
 			);
 			path = CircleLoading;
+			sourceTree = "<group>";
+		};
+		42712BCB229E28380059AFB2 /* ThreeBall */ = {
+			isa = PBXGroup;
+			children = (
+				42712BCC229E28A30059AFB2 /* ThreeBallViewController.swift */,
+				42712BCE229E2F7D0059AFB2 /* ThreeBallView.swift */,
+			);
+			path = ThreeBall;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,10 +174,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42712BCF229E2F7D0059AFB2 /* ThreeBallView.swift in Sources */,
 				4217C9C7229ACBE700307D85 /* WiredViewController.swift in Sources */,
 				4217C9C5229A78D900307D85 /* PainterViewController.swift in Sources */,
+				42712BCD229E28A30059AFB2 /* ThreeBallViewController.swift in Sources */,
 				42239A2F2296DAE200AD3DD4 /* ViewController.swift in Sources */,
-				420A7D3E229C2B8F0039B5D3 /* NavigationBackViewController.swift in Sources */,
 				42239A2D2296DAE200AD3DD4 /* AppDelegate.swift in Sources */,
 				4217C9C2229A436100307D85 /* CircleViewController.swift in Sources */,
 			);
