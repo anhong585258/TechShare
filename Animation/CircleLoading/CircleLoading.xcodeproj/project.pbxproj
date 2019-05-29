@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4210D436229EA69100DBB4BA /* HardModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4210D435229EA69100DBB4BA /* HardModeViewController.swift */; };
 		4217C9C2229A436100307D85 /* CircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217C9C1229A436100307D85 /* CircleViewController.swift */; };
 		4217C9C5229A78D900307D85 /* PainterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217C9C4229A78D900307D85 /* PainterViewController.swift */; };
 		4217C9C7229ACBE700307D85 /* WiredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217C9C6229ACBE700307D85 /* WiredViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4210D435229EA69100DBB4BA /* HardModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardModeViewController.swift; sourceTree = "<group>"; };
 		4217C9C1229A436100307D85 /* CircleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleViewController.swift; sourceTree = "<group>"; };
 		4217C9C4229A78D900307D85 /* PainterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PainterViewController.swift; sourceTree = "<group>"; };
 		4217C9C6229ACBE700307D85 /* WiredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiredViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4210D434229EA55000DBB4BA /* Hard Mode */ = {
+			isa = PBXGroup;
+			children = (
+				4210D435229EA69100DBB4BA /* HardModeViewController.swift */,
+			);
+			path = "Hard Mode";
+			sourceTree = "<group>";
+		};
 		4217C9C0229A434100307D85 /* CircleLoading */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +93,7 @@
 				4217C9C0229A434100307D85 /* CircleLoading */,
 				4217C9C3229A78BB00307D85 /* Painter */,
 				42712BCB229E28380059AFB2 /* ThreeBall */,
+				4210D434229EA55000DBB4BA /* Hard Mode */,
 				42239A2C2296DAE200AD3DD4 /* AppDelegate.swift */,
 				42239A2E2296DAE200AD3DD4 /* ViewController.swift */,
 				42239A302296DAE200AD3DD4 /* Main.storyboard */,
@@ -176,6 +187,7 @@
 			files = (
 				42712BCF229E2F7D0059AFB2 /* ThreeBallView.swift in Sources */,
 				4217C9C7229ACBE700307D85 /* WiredViewController.swift in Sources */,
+				4210D436229EA69100DBB4BA /* HardModeViewController.swift in Sources */,
 				4217C9C5229A78D900307D85 /* PainterViewController.swift in Sources */,
 				42712BCD229E28A30059AFB2 /* ThreeBallViewController.swift in Sources */,
 				42239A2F2296DAE200AD3DD4 /* ViewController.swift in Sources */,

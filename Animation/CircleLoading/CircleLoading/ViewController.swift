@@ -56,7 +56,7 @@ enum AnimationListTableViewItemIndex: Int {
         case .metaBall:
             return nil
         case .DeCasteljau:
-            return nil
+            return HardModeViewController()
         }
     }
 
