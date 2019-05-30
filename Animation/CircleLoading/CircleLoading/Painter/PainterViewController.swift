@@ -90,7 +90,7 @@ class PainterViewController: UIViewController {
             view.layer.addSublayer(shape)
             shape.fillColor = nil
             shape.strokeColor = UIColor.blue.cgColor
-            shape.lineWidth = 7.0
+            shape.lineWidth = 4.0
             shape.lineJoin = .round
             return shape
         }()

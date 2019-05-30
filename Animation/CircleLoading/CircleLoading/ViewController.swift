@@ -46,7 +46,7 @@ enum AnimationListTableViewItemIndex: Int {
         case .DeCasteljau:
             return .darkText
         case .rollerCoaster:
-            return .lightGray
+            return .darkText
         }
     }
     

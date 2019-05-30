@@ -10,9 +10,11 @@ import UIKit
 
 class RollerCoasterViewController: UIViewController {
     private var bezierPath: UIBezierPath = UIBezierPath()
+    private var smoothPath: UIBezierPath = UIBezierPath()
     private var points: [CGPoint] = []
     private var previousPoint: CGPoint = .zero
     private weak var trackLayer: CAShapeLayer?
+    private var carLayer: CALayer = CALayer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,37 +24,65 @@ class RollerCoasterViewController: UIViewController {
     }
 
     @IBAction func tapStart(_ sender: UIButton) {
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        animation.path = smoothPath.cgPath
+        animation.rotationMode = .rotateAuto
+        animation.duration = 5
+        animation.timingFunction = .init(name: .easeInEaseOut)
+        CATransaction.begin()
+        carLayer.add(animation, forKey: nil)
+        CATransaction.setCompletionBlock {
+            CATransaction.setDisableActions(true)
+            self.carLayer.position = self.previousPoint
+        }
+        CATransaction.commit()
     }
     
     @IBAction func tapReset(_ sender: UIButton) {
         points.removeAll()
         bezierPath.removeAllPoints()
-        updataTrack()
+        smoothPath.removeAllPoints()
+        previousPoint = .zero
+        carLayer.removeAllAnimations()
+        updateTrack()
+    }
+    
+    @IBAction func tapSmoothConnect(_ sender: UIButton) {
+        guard points.count > 1 else { return }
+        calculate(points: points, bezier: bezierPath)
+        updateTrack()
+        previousPoint = points.last ?? .zero
+        points = [previousPoint]
+        smoothPath.append(bezierPath)
+        bezierPath.removeAllPoints()
+        bezierPath.move(to: previousPoint)
     }
     
     @objc private func tapGesture(_ sender: UITapGestureRecognizer) {
         let point = sender.location(in: view)
         points.append(point)
-        if points.count == 1 {
+
+        if previousPoint == .zero {
             bezierPath.move(to: point)
-        } else if points.count == 2 {
+        } else {
             bezierPath.addLine(to: point)
         }
         previousPoint = point
         bezierPath.addArc(withCenter: point, radius: 2.0, startAngle: CGFloat(-Float.pi), endAngle: CGFloat(Float.pi), clockwise: true)
-        if points.count > 2 {
-            calculate(points: points, bezier: bezierPath)
-        }
-        updataTrack()
+
+        updateTrack()
     }
     
     private func setup() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
         tapGesture.numberOfTapsRequired = 1
         view.addGestureRecognizer(tapGesture)
+        carLayer.contents = UIImage(named: "Car")?.cgImage
+        carLayer.frame = CGRect(x: 100, y: 100, width: 40, height: 40)
+        view.layer.addSublayer(carLayer)
     }
     
-    private func updataTrack() {
+    private func updateTrack() {
         if trackLayer == nil {
             trackLayer = {
                 $0.strokeColor = UIColor.blue.cgColor
@@ -64,7 +94,10 @@ class RollerCoasterViewController: UIViewController {
                 return $0
             }(CAShapeLayer())
         }
-        trackLayer?.path = bezierPath.cgPath
+        let finalPath = UIBezierPath()
+        finalPath.append(smoothPath)
+        finalPath.append(bezierPath)
+        trackLayer?.path = finalPath.cgPath
     }
 }
 
@@ -76,7 +109,7 @@ extension RollerCoasterViewController {
             return
         }
         bezier.move(to: firstPoint)
-        for u in stride(from: 0.05, to: 1.0, by: 0.05) {
+        for u in stride(from: 0.05, to: 1.05, by: 0.05) {
             let point = calculate(points: points, u: CGFloat(u))
             bezier.addLine(to: point)
         }

@@ -34,13 +34,22 @@
                         <action selector="tapReset:" destination="-1" eventType="touchUpInside" id="QFb-B3-X9l"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44a-OZ-gr3">
+                    <rect key="frame" x="144" y="832" width="46" height="30"/>
+                    <state key="normal" title="我不说"/>
+                    <connections>
+                        <action selector="tapSmoothConnect:" destination="-1" eventType="touchUpInside" id="CTD-gg-M9w"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="tqS-y0-kr6" firstAttribute="leading" secondItem="Zuh-5a-Eb4" secondAttribute="trailing" constant="30" id="E34-HS-96f"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Zuh-5a-Eb4" secondAttribute="bottom" id="dxQ-Rl-Ovp"/>
                 <constraint firstItem="Zuh-5a-Eb4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="28" id="jDf-YT-lYL"/>
+                <constraint firstItem="44a-OZ-gr3" firstAttribute="centerY" secondItem="tqS-y0-kr6" secondAttribute="centerY" id="m84-Iw-RlW"/>
                 <constraint firstItem="tqS-y0-kr6" firstAttribute="top" secondItem="Zuh-5a-Eb4" secondAttribute="top" id="qfk-Bg-KEl"/>
+                <constraint firstItem="44a-OZ-gr3" firstAttribute="leading" secondItem="tqS-y0-kr6" secondAttribute="trailing" constant="24" id="vuR-N5-7dv"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
