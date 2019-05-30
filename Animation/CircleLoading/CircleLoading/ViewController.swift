@@ -26,7 +26,7 @@ enum AnimationListTableViewItemIndex: Int {
         case .metaBall:
             return "Meta Ball"
         case .DeCasteljau:
-            return "De Casteljau in Bezier"
+            return "Hard模式"
         }
     }
     
@@ -41,7 +41,7 @@ enum AnimationListTableViewItemIndex: Int {
         case .metaBall:
             return .lightGray
         case .DeCasteljau:
-            return .lightGray
+            return .darkText
         }
     }
     
@@ -56,7 +56,8 @@ enum AnimationListTableViewItemIndex: Int {
         case .metaBall:
             return nil
         case .DeCasteljau:
-            return HardModeViewController()
+            let story = UIStoryboard(name: "Main", bundle: .main)
+            return story.instantiateViewController(withIdentifier: "HardModeViewController")
         }
     }
 
@@ -72,6 +73,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "我是一个动画Demo"
     }
     
     // MARK: - Actions

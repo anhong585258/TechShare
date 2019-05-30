@@ -15,6 +15,7 @@ class ThreeBallViewController: UITableViewController {
         view.backgroundColor = .white
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "button")
+        navigationItem.title = "我是三个小球加载动画"
     }
 
     // MARK: - Table view data source

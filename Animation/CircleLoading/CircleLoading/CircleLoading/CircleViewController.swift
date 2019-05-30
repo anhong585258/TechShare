@@ -92,6 +92,7 @@ class CircleViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setup()
+        navigationItem.title = "我是谷歌加载动画"
     }
     
     override func viewWillLayoutSubviews() {

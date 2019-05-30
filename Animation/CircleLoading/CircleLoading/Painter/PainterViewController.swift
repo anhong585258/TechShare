@@ -33,6 +33,7 @@ class PainterViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setup()
+        navigationItem.title = "我是手绘"
     }
     
     override func viewDidDisappear(_ animated: Bool) {

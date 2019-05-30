@@ -75,26 +75,27 @@ extension HardModeView {
     // MARK: - Ovderride
     override func draw(_ rect: CGRect) {
         if controlPoints.count > 1, let context = UIGraphicsGetCurrentContext() {
-            if displayLink?.isPaused ?? true {
-                
-            } else {
-                for points in allPoints {
-                    drawLines(points: points, color: nil, context: context)
-                }
+            for points in allPoints {
+                drawLines(points: points, color: nil, context: context)
             }
-            drawLines(points: finalPoints, color: .blue, context: context, wantDrawPoint: false)
-            drawLines(points: controlPoints, color: .darkGray, context: context)
+            if finalPoints.count > 0 {
+                drawLines(points: finalPoints, color: .blue, context: context, wantDrawPoint: false, lineWidth: 4.0)
+            }
+            if controlPoints.count > 1 {
+                drawLines(points: controlPoints, color: .darkGray, context: context)
+            }
+        } else if controlPoints.count == 1, let context = UIGraphicsGetCurrentContext() {
+            drawPoint(point: controlPoints[0], pointColor: .darkGray, context: context)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard displayLink?.isPaused ?? false,
-            let touch = touches.first,
-            let context = UIGraphicsGetCurrentContext() else { return }
+            let touch = touches.first else { return }
         
         let point = touch.location(in: self)
         controlPoints.append(point)
-        drawPoint(point: point, pointColor: .darkGray, context: context)
+        setNeedsDisplay()
     }
     
     // MARK: - Display Link
@@ -117,7 +118,7 @@ extension HardModeView {
 extension HardModeView {
     
     func draw() {
-        u = 0.01
+        u = 0.005
         allPoints.removeAll()
         finalPoints = [calculate(points: controlPoints, u: CGFloat(u))]
         displayLink?.isPaused = false
@@ -126,14 +127,25 @@ extension HardModeView {
     func reset() {
         allPoints.removeAll()
         controlPoints.removeAll()
-        displayLink?.isPaused = false
+        finalPoints.removeAll()
+        displayLink?.isPaused = true
+        setNeedsDisplay()
+    }
+    
+    func setProgress(progress: Float) {
+        guard displayLink?.isPaused ?? true, controlPoints.count > 2 else { return }
+        allPoints.removeAll()
+        finalPoints.removeAll()
+        u = Double(progress)
+        finalPoints.append(calculate(points: controlPoints, u: CGFloat(u)))
+        setNeedsDisplay()
     }
     
     func invalid() {
         displayLink?.invalidate()
     }
     
-    private func drawLines(points: [CGPoint], color: UIColor?, context: CGContext, wantDrawPoint: Bool = true) {
+    private func drawLines(points: [CGPoint], color: UIColor?, context: CGContext, wantDrawPoint: Bool = true, lineWidth: CGFloat = 2.0) {
         var drawColor: UIColor = .blue
         for index in 0..<(points.count - 1) {
             let start = points[index]
@@ -142,7 +154,7 @@ extension HardModeView {
             if wantDrawPoint {
                 drawPoint(point: start, pointColor: drawColor, context: context)
             }
-            drawLine(with: start, to: end, color: drawColor, context: context)
+            drawLine(with: start, to: end, color: drawColor, context: context, lineWidth: lineWidth)
         }
         if let last = points.last {
             if wantDrawPoint {
@@ -158,12 +170,12 @@ extension HardModeView {
         context.fillPath()
     }
     
-    private func drawLine(with start: CGPoint, to end: CGPoint, color: UIColor, context: CGContext) {
+    private func drawLine(with start: CGPoint, to end: CGPoint, color: UIColor, context: CGContext, lineWidth: CGFloat = 2.0) {
         let path = CGMutablePath()
         path.move(to: start)
         path.addLine(to: end)
         context.setStrokeColor(color.cgColor)
-        context.setLineWidth(2.0)
+        context.setLineWidth(lineWidth)
         context.addPath(path)
         context.strokePath()
     }
