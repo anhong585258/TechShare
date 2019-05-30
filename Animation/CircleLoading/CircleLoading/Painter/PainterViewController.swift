@@ -24,7 +24,6 @@ class PainterViewController: UIViewController {
     private var path = UIBezierPath()
     private var previousPoint: CGPoint = .zero
     private var beginPoint: CGPoint = .zero
-    private var onBeginProcess = false
     private let threadhold: CGFloat = 10.0
 
     // MARK: - Life cycle
@@ -48,7 +47,6 @@ class PainterViewController: UIViewController {
         switch pan.state {
         case .began:
             if previousPoint == .zero {
-//                onBeginProcess = true
                 if let pan  = pan as? SomePanGestureRecognizer {
                     path.move(to: pan.initialTouchLocation ?? currentPoint)
                 } else {
@@ -58,14 +56,7 @@ class PainterViewController: UIViewController {
             }
             previousPoint = currentPoint
         case .changed:
-            if onBeginProcess {
-                if distance(p1: currentPoint, p2: beginPoint) > threadhold {
-                    onBeginProcess = false
-                    path.addLine(to: currentPoint)
-                }
-            } else {
-                path.addQuadCurve(to: currentPoint, controlPoint: CGPoint(x: (currentPoint.x + previousPoint.x) / 2, y: (currentPoint.y + previousPoint.y) / 2))
-            }
+            path.addQuadCurve(to: currentPoint, controlPoint: CGPoint(x: (currentPoint.x + previousPoint.x) / 2, y: (currentPoint.y + previousPoint.y) / 2))
             previousPoint = currentPoint
         case .ended:
             previousPoint = .zero
@@ -88,8 +79,8 @@ class PainterViewController: UIViewController {
         view.backgroundColor = .white
         
         panGestureRecognizer = {
-            let pan = SomePanGestureRecognizer(target: self, action: #selector(panGesture(pan:)))
-//            let pan = UIPanGestureRecognizer(target: self, action: #selector(panGesture(pan:)))
+//            let pan = SomePanGestureRecognizer(target: self, action: #selector(panGesture(pan:)))
+            let pan = UIPanGestureRecognizer(target: self, action: #selector(panGesture(pan:)))
             view.addGestureRecognizer(pan)
             return pan
         }()
