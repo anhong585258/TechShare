@@ -28,7 +28,21 @@ class ThreeBallView: UIView {
     private var rightPosition: CGPoint {
         return CGPoint(x: (rightBallLayer.position.x + middleBallLayer.position.x) / 2.0, y: rightBallLayer.position.y)
     }
-    private let duration = 1.1
+    var duration: Double = 1.1
+    
+    var offset: CFTimeInterval {
+        get {
+            return leftBallLayer.animation(forKey: "animation")?.timeOffset ?? 0
+        }
+        set {
+            if newValue >= duration || leftBallLayer.speed > 0 || middleBallLayer.speed > 0 || rightBallLayer.speed > 0 {
+                return
+            }
+            leftBallLayer.timeOffset = newValue
+            middleBallLayer.timeOffset = newValue
+            rightBallLayer.timeOffset = newValue
+        }
+    }
     
 
     private static let radius = 5.0
@@ -211,15 +225,15 @@ class ThreeBallView: UIView {
 
     private func initializeAnimations() {
         leftBallLayer.speed = 0.0
-        leftBallLayer.add(leftAnimation, forKey: nil)
+        leftBallLayer.add(leftAnimation, forKey: "animation")
         leftBallLayer.timeOffset = 0
 
         middleBallLayer.speed = 0.0
-        middleBallLayer.add(middleAnimation, forKey: nil)
+        middleBallLayer.add(middleAnimation, forKey: "animation")
         middleBallLayer.timeOffset = 0
 
         rightBallLayer.speed = 0.0
-        rightBallLayer.add(rightAnimation, forKey: nil)
+        rightBallLayer.add(rightAnimation, forKey: "animation")
         rightBallLayer.timeOffset = 0
     }
 }

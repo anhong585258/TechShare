@@ -9,6 +9,7 @@
 import UIKit
 
 class ThreeBallViewController: UITableViewController {
+    private weak var refreshThreeBallView: ThreeBallView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +17,8 @@ class ThreeBallViewController: UITableViewController {
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "button")
         navigationItem.title = "我是三个小球加载动画"
+        tableView.contentOffset = CGPoint(x: 0, y: -100)
+        setupRefreshControl()
     }
 
     // MARK: - Table view data source
@@ -87,6 +90,15 @@ class ThreeBallViewController: UITableViewController {
 class TableViewCell: UITableViewCell {
     private weak var threeBallView: ThreeBallView!
     
+    var duration: Double {
+        get { return threeBallView.duration }
+    }
+
+    var offset: TimeInterval {
+        get { return threeBallView.offset }
+        set { threeBallView.offset = newValue }
+    }
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
@@ -130,7 +142,32 @@ class TableViewCell: UITableViewCell {
         contentView.addConstraint(constraint)
         constraint = NSLayoutConstraint(item: threeBallView!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: ThreeBallView.estimatedSize.width)
         contentView.addConstraint(constraint)
-        constraint = NSLayoutConstraint(item: threeBallView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: ThreeBallView.estimatedSize.height)
+        constraint = NSLayoutConstraint(item: threeBallView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: ThreeBallView.estimatedSize.height - 100)
         contentView.addConstraint(constraint)
+    }
+}
+
+// MARK: - Pulling animation
+extension ThreeBallViewController {
+    private func setupRefreshControl() {
+        let slide = UISlider(frame: .zero)
+        view.addSubview(slide)
+        slide.addTarget(self, action: #selector(manuProgress(_:)), for: .valueChanged)
+        slide.maximumValue = 2.0
+
+        slide.translatesAutoresizingMaskIntoConstraints = false
+        var constraint = NSLayoutConstraint(item: slide, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+        view.addConstraint(constraint)
+        constraint = NSLayoutConstraint(item: slide, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200)
+        view.addConstraint(constraint)
+        constraint = NSLayoutConstraint(item: slide, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 60)
+        view.addConstraint(constraint)
+    }
+
+    @objc private func manuProgress(_ sender: UISlider) {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
+            let current = (sender.value > 1.0 ? (sender.value - 1.0) : sender.value) * Float(cell.duration)
+            cell.offset = TimeInterval(current)
+        }
     }
 }
