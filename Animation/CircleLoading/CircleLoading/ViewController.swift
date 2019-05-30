@@ -14,6 +14,7 @@ enum AnimationListTableViewItemIndex: Int {
     case threeBall = 2
     case metaBall = 3
     case DeCasteljau = 4
+    case rollerCoaster = 5
     
     var title: String {
         switch self {
@@ -27,6 +28,8 @@ enum AnimationListTableViewItemIndex: Int {
             return "Meta Ball"
         case .DeCasteljau:
             return "Hard模式"
+        case .rollerCoaster:
+            return "Roller Coaster"
         }
     }
     
@@ -42,6 +45,8 @@ enum AnimationListTableViewItemIndex: Int {
             return .lightGray
         case .DeCasteljau:
             return .darkText
+        case .rollerCoaster:
+            return .lightGray
         }
     }
     
@@ -58,10 +63,12 @@ enum AnimationListTableViewItemIndex: Int {
         case .DeCasteljau:
             let story = UIStoryboard(name: "Main", bundle: .main)
             return story.instantiateViewController(withIdentifier: "HardModeViewController")
+        case .rollerCoaster:
+            return RollerCoasterViewController()
         }
     }
 
-    static var count: Int { return 5 }
+    static var count: Int { return 6 }
 }
 
 class ViewController: UIViewController {

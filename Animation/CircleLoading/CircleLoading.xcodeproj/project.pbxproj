@@ -19,6 +19,8 @@
 		42712BCD229E28A30059AFB2 /* ThreeBallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42712BCC229E28A30059AFB2 /* ThreeBallViewController.swift */; };
 		42712BCF229E2F7D0059AFB2 /* ThreeBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42712BCE229E2F7D0059AFB2 /* ThreeBallView.swift */; };
 		42D009C4229F743300944223 /* HardModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D009C3229F743300944223 /* HardModeView.swift */; };
+		42D009C8229FCCB100944223 /* RollerCoasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D009C6229FCCB100944223 /* RollerCoasterViewController.swift */; };
+		42D009C9229FCCB100944223 /* RollerCoasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D009C7229FCCB100944223 /* RollerCoasterViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		42712BCC229E28A30059AFB2 /* ThreeBallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeBallViewController.swift; sourceTree = "<group>"; };
 		42712BCE229E2F7D0059AFB2 /* ThreeBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeBallView.swift; sourceTree = "<group>"; };
 		42D009C3229F743300944223 /* HardModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardModeView.swift; sourceTree = "<group>"; };
+		42D009C6229FCCB100944223 /* RollerCoasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollerCoasterViewController.swift; sourceTree = "<group>"; };
+		42D009C7229FCCB100944223 /* RollerCoasterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RollerCoasterViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 				4217C9C0229A434100307D85 /* CircleLoading */,
 				4217C9C3229A78BB00307D85 /* Painter */,
 				42712BCB229E28380059AFB2 /* ThreeBall */,
+				42D009C5229FCC7B00944223 /* Roller Coaster */,
 				4210D434229EA55000DBB4BA /* Hard Mode */,
 				42239A2C2296DAE200AD3DD4 /* AppDelegate.swift */,
 				42239A2E2296DAE200AD3DD4 /* ViewController.swift */,
@@ -115,6 +120,15 @@
 				42712BCE229E2F7D0059AFB2 /* ThreeBallView.swift */,
 			);
 			path = ThreeBall;
+			sourceTree = "<group>";
+		};
+		42D009C5229FCC7B00944223 /* Roller Coaster */ = {
+			isa = PBXGroup;
+			children = (
+				42D009C6229FCCB100944223 /* RollerCoasterViewController.swift */,
+				42D009C7229FCCB100944223 /* RollerCoasterViewController.xib */,
+			);
+			path = "Roller Coaster";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D009C9229FCCB100944223 /* RollerCoasterViewController.xib in Resources */,
 				42239A372296DAE500AD3DD4 /* LaunchScreen.storyboard in Resources */,
 				42239A342296DAE500AD3DD4 /* Assets.xcassets in Resources */,
 				42239A322296DAE200AD3DD4 /* Main.storyboard in Resources */,
@@ -190,6 +205,7 @@
 			files = (
 				42712BCF229E2F7D0059AFB2 /* ThreeBallView.swift in Sources */,
 				4217C9C7229ACBE700307D85 /* WiredViewController.swift in Sources */,
+				42D009C8229FCCB100944223 /* RollerCoasterViewController.swift in Sources */,
 				4210D436229EA69100DBB4BA /* HardModeViewController.swift in Sources */,
 				4217C9C5229A78D900307D85 /* PainterViewController.swift in Sources */,
 				42712BCD229E28A30059AFB2 /* ThreeBallViewController.swift in Sources */,
