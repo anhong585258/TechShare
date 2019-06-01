@@ -9,15 +9,19 @@
 import UIKit
 
 enum AnimationListTableViewItemIndex: Int {
-    case circleLoading = 0
-    case bezierDraw = 1
-    case threeBall = 2
-    case metaBall = 3
-    case DeCasteljau = 4
-    case rollerCoaster = 5
+    case implicitAnimation
+    case circleLoading
+    case bezierDraw
+    case threeBall
+    case metaBall
+    case DeCasteljau
+    case rollerCoaster
+    case total
     
     var title: String {
         switch self {
+        case .implicitAnimation:
+            return "Implicit animation"
         case .circleLoading:
             return "Spin loading"
         case .bezierDraw:
@@ -30,11 +34,15 @@ enum AnimationListTableViewItemIndex: Int {
             return "Hard模式"
         case .rollerCoaster:
             return "Roller Coaster"
+        case .total:
+            return ""
         }
     }
     
     var titleColor: UIColor {
         switch self {
+        case .implicitAnimation:
+            return .darkText
         case .circleLoading:
             return .darkText
         case .bezierDraw:
@@ -47,11 +55,15 @@ enum AnimationListTableViewItemIndex: Int {
             return .darkText
         case .rollerCoaster:
             return .darkText
+        case .total:
+            return .clear
         }
     }
     
     var viewController: UIViewController? {
         switch self {
+        case .implicitAnimation:
+            return BasicViewController()
         case .circleLoading:
             return CircleViewController()
         case .bezierDraw:
@@ -65,10 +77,12 @@ enum AnimationListTableViewItemIndex: Int {
             return story.instantiateViewController(withIdentifier: "HardModeViewController")
         case .rollerCoaster:
             return RollerCoasterViewController()
+        default:
+            return nil
         }
     }
 
-    static var count: Int { return 6 }
+    static var count: Int { return AnimationListTableViewItemIndex.total.rawValue }
 }
 
 class ViewController: UIViewController {

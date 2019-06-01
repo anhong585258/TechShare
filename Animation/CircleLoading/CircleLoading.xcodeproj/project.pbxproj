@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4210D436229EA69100DBB4BA /* HardModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4210D435229EA69100DBB4BA /* HardModeViewController.swift */; };
+		4214E67822A29515009D6D6D /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214E67722A29515009D6D6D /* BasicViewController.swift */; };
 		4217C9C2229A436100307D85 /* CircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217C9C1229A436100307D85 /* CircleViewController.swift */; };
 		4217C9C5229A78D900307D85 /* PainterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217C9C4229A78D900307D85 /* PainterViewController.swift */; };
 		4217C9C7229ACBE700307D85 /* WiredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217C9C6229ACBE700307D85 /* WiredViewController.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		4210D435229EA69100DBB4BA /* HardModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardModeViewController.swift; sourceTree = "<group>"; };
+		4214E67722A29515009D6D6D /* BasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicViewController.swift; sourceTree = "<group>"; };
 		4217C9C1229A436100307D85 /* CircleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleViewController.swift; sourceTree = "<group>"; };
 		4217C9C4229A78D900307D85 /* PainterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PainterViewController.swift; sourceTree = "<group>"; };
 		4217C9C6229ACBE700307D85 /* WiredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiredViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				42239A352296DAE500AD3DD4 /* LaunchScreen.storyboard */,
 				42239A382296DAE500AD3DD4 /* Info.plist */,
 				4217C9C6229ACBE700307D85 /* WiredViewController.swift */,
+				4214E67722A29515009D6D6D /* BasicViewController.swift */,
 			);
 			path = CircleLoading;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				4210D436229EA69100DBB4BA /* HardModeViewController.swift in Sources */,
 				4217C9C5229A78D900307D85 /* PainterViewController.swift in Sources */,
 				42712BCD229E28A30059AFB2 /* ThreeBallViewController.swift in Sources */,
+				4214E67822A29515009D6D6D /* BasicViewController.swift in Sources */,
 				42239A2F2296DAE200AD3DD4 /* ViewController.swift in Sources */,
 				42D009C4229F743300944223 /* HardModeView.swift in Sources */,
 				42239A2D2296DAE200AD3DD4 /* AppDelegate.swift in Sources */,

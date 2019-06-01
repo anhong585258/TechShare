@@ -15,20 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var tests: [TestWindow] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-//        let w1 = TestWindow.create(name: "A", color: .blue, delegate: self)
-//        let w2 = TestWindow.create(name: "B", color: .white, delegate: self)
-//        let w3 = TestWindow.create(name: "C", color: .red, delegate: self)
-//        tests = [w1, w2, w3]
-//        w1.frame = CGRect(x: 50, y: 50, width: 200, height: 200)
-//        w2.frame = CGRect(x: 50, y: 200, width: 200, height: 200)
-//        w3.frame = CGRect(x: 200, y: 50, width: 200, height: 200)
-//        w1.windowLevel = UIWindow.Level(100.0)
-//        w2.windowLevel = UIWindow.Level(200.0)
-//        w3.windowLevel = UIWindow.Level(300.0)
-//
-//        makeKeyWindow(index: 0)
-        
         return true
     }
 
